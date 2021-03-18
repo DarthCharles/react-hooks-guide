@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { HookName } from "./HookName";
+import React, { useState } from "react";
 
+import { HookName } from "./HookName";
 
 const expensiveComputation = () => {
   console.log("Im expensive and will run once");
