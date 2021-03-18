@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
 
-import { HookName } from "./HookName";
-
 export const RefHook = () => {
   const inputRef = useRef(null);
 
