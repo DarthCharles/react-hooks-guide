@@ -19,6 +19,7 @@ export enum ActionTypes {
   USE_IMPERATIVE_HANDLE = "useImperativeHandle",
   USE_LAYOUT_EFFECT = "useLayoutEffect",
   USE_DEBUG_VALUE = "useDebugValue",
+  USE_CUSTOM = "useCustom",
 }
 
 export type AppState = {
@@ -55,6 +56,41 @@ function reducer(state: AppState, action: AppAction) {
     case ActionTypes.USE_REF:
       return {
         currentComponent: <RefHook />,
+        name: action.type,
+      };
+    case ActionTypes.USE_REDUCER:
+      return {
+        currentComponent: null,
+        name: action.type,
+      };
+    case ActionTypes.USE_CALLBACK:
+      return {
+        currentComponent: null,
+        name: action.type,
+      };
+    case ActionTypes.USE_MEMO:
+      return {
+        currentComponent: null,
+        name: action.type,
+      };
+    case ActionTypes.USE_IMPERATIVE_HANDLE:
+      return {
+        currentComponent: null,
+        name: action.type,
+      };
+    case ActionTypes.USE_LAYOUT_EFFECT:
+      return {
+        currentComponent: null,
+        name: action.type,
+      };
+    case ActionTypes.USE_DEBUG_VALUE:
+      return {
+        currentComponent: null,
+        name: action.type,
+      };
+    case ActionTypes.USE_CUSTOM_HOOK:
+      return {
+        currentComponent: null,
         name: action.type,
       };
     default:
@@ -147,6 +183,15 @@ const App = () => {
         }
       >
         useDebugValue
+      </button>
+      <button
+        onClick={() =>
+          dispatch({
+            type: ActionTypes.USE_CUSTOM_HOOK,
+          })
+        }
+      >
+        useCustom
       </button>
       {name && <HookName name={name} />}
       {currentComponent ? currentComponent : <p> Pick a hook! </p>}

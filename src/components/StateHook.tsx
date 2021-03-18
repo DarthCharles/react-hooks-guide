@@ -7,6 +7,8 @@ import React, { useState } from "react";
 
 export const StateHook = () => {
   const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(() => expensiveComputation());
+  // const [count, setCount] = useState(expensiveComputation());
 
   const incrementCount = () => {
     setCount((prevCount) => prevCount + 1);
