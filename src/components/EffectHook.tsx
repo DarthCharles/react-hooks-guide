@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export const EffectHook = () => {
   const [randomDog, setRandomDog] = useState("");
-  const [fetchNew, setFetchNew] = useState(true);
+  const [shouldFetchNew, setshouldFetchNew] = useState(true);
 
   useEffect(() => {
     console.log("I render");
@@ -13,23 +13,28 @@ export const EffectHook = () => {
   });
 
   useEffect(() => {
-    if (fetchNew) {
+    if (shouldFetchNew) {
       fetch("https://dog.ceo/api/breeds/image/random")
         .then((response) => response.json())
         .then((json) => {
-          setFetchNew(false);
+          setshouldFetchNew(false);
           setRandomDog(json.message);
         });
     }
-  }, [fetchNew]);
+  }, [shouldFetchNew]);
 
-  const handleClick = () => {
-    setFetchNew(true);
+  const onClickHandler = () => {
+    setshouldFetchNew(true);
   };
 
   return (
     <div>
-      <button onClick={handleClick}>Click Me</button>
+      <button onClick={onClickHandler}>
+        Random{" "}
+        <span role="img" aria-label="dog">
+          🐶
+        </span>
+      </button>
       <br />
       {randomDog && (
         <img style={{ width: 300 }} alt="dog" src={randomDog} />
