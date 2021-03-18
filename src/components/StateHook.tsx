@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import { HookName } from "./HookName";
 
-const expensiveComputation = () => {
-  console.log("Im expensive and will run once");
-  return 4;
-};
+// const expensiveComputation = () => {
+//   console.log("Im expensive and will run once");
+//   return 4;
+// };
 
 export const StateHook = () => {
   const [count, setCount] = useState(0);

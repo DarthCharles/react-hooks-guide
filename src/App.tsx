@@ -1,6 +1,6 @@
 import React, { useReducer, ReactNode } from "react";
 
-import { StateHook, EffectHook } from "./components";
+import { StateHook, EffectHook, ContextHook, RefHook } from "./components";
 
 export enum ActionTypes {
   USE_STATE = "USE_STATE",
@@ -31,6 +31,10 @@ function reducer(state: AppState, action: AppAction) {
       return { currentComponent: <StateHook /> };
     case ActionTypes.USE_EFFECT:
       return { currentComponent: <EffectHook /> };
+    case ActionTypes.USE_CONTEXT:
+      return { currentComponent: <ContextHook /> };
+    case ActionTypes.USE_REF:
+      return { currentComponent: <RefHook /> };
     default:
       return { currentComponent: null };
   }
