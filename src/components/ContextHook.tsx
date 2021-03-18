@@ -1,3 +1,3 @@
 import React from "react";
 
-export const ContextHook = () => <h1>ContextHook</h1>;
+export const ContextHook = () => <div />;

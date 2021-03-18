@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { HookName } from "./HookName";
-
 export const EffectHook = () => {
   const [randomDog, setRandomDog] = useState("");
-
   const [fetchNew, setFetchNew] = useState(true);
 
   useEffect(() => {
@@ -32,10 +29,11 @@ export const EffectHook = () => {
 
   return (
     <div>
-      <HookName name="useEffect" />
       <button onClick={handleClick}>Click Me</button>
       <br />
-      <img style={{ width: 300 }} alt="dog" src={randomDog} />
+      {randomDog && (
+        <img style={{ width: 300 }} alt="dog" src={randomDog} />
+      )}
     </div>
   );
 };
