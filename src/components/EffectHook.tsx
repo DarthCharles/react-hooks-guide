@@ -1,6 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
-
-import { emojis } from "../utils";
+import { useEffect, useState } from "react";
 
 import { HookName } from "./HookName";
 
@@ -18,10 +16,15 @@ export const EffectHook = () => {
   });
 
   useEffect(() => {
-    fetch("https://dog.ceo/api/breeds/image/random")
-      .then((response) => response.json())
-      .then((json) => setRandomDog(json.message));
-  }, []);
+    if (fetchNew) {
+      fetch("https://dog.ceo/api/breeds/image/random")
+        .then((response) => response.json())
+        .then((json) => {
+          setFetchNew(false);
+          setRandomDog(json.message);
+        });
+    }
+  }, [fetchNew]);
 
   const handleClick = () => {
     setFetchNew(true);
