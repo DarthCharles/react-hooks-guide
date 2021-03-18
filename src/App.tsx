@@ -30,7 +30,7 @@ export type AppAction = {
   type: ActionTypes;
 };
 
-const initialState = {
+const initialState: AppState = {
   currentComponent: null,
   name: "",
 };
