@@ -1,6 +1,6 @@
-import "./styles.css";
-import { StateHook, EffectHook } from "./components";
 import { useReducer, ReactNode } from "react";
+
+import { StateHook, EffectHook } from "./components";
 
 export enum ActionTypes {
   USE_STATE = "USE_STATE",
