@@ -18,6 +18,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
+    "esModuleInterop": false,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true
   }
