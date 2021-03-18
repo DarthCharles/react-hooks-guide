@@ -1,3 +1,9 @@
 import React from "react";
 
-export const RefHook = () => <h1>RefHook</h1>;
+export const RefHook = () => {
+  return (
+    <div>
+      <input type="text" />
+    </div>
+  );
+};
