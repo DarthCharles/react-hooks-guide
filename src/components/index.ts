@@ -4,8 +4,10 @@ import { ContextHook } from "./ContextHook";
 import { RefHook } from "./RefHook";
 import { CallbackHook } from "./CallbackHook";
 import { MemoHook } from "./MemoHook";
+import { CustomHook } from "./CustomHook";
 
 export {
+  CustomHook,
   StateHook,
   EffectHook,
   ContextHook,

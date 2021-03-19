@@ -1,89 +1,81 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
-import { themes } from "../utils";
-
-type Theme = {
-  foreground: string;
-  background: string;
-};
-
-const BoxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  width: 300px;
-  font-size: 24px;
-  color: ${({ theme }: { theme: Theme }) => theme.foreground};
-  background: ${({ theme }: { theme: Theme }) => theme.background};
-`;
-
-const StyledButton = styled.button`
-  width: 300px;
-  margin-bottom: 10px;
-`;
+import { translations, availableLocales } from "../utils";
 
 const StyledContainer = styled.div`
-  display: flex;
-  justify-content: center;
+  font-size: 36px;
 `;
 
-const ThemeContext = React.createContext<{
-  theme: Theme;
-  toggleTheme: () => void;
+const StyledSelect = styled.select`
+  width: 100px;
+  height: 32px;
+  margin-bottom: 20px;
+`;
+
+export const Context = React.createContext<{
+  name: string;
+  locale: string;
+  setLocale: (locale: string) => void;
 }>({
-  theme: themes.light,
-  toggleTheme: () => null,
+  name: "",
+  locale: "en-US",
+  setLocale: () => null,
 });
 
-export const ThemeProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [currentTheme, setTheme] = useState("light");
-
-  const toggleTheme = () => {
-    setTheme(currentTheme === "light" ? "dark" : "light");
-  };
-
+const GreetingComponent = () => {
+  const { name, locale } = useContext(Context);
   return (
-    <ThemeContext.Provider
-      value={{ theme: themes[currentTheme], toggleTheme }}
-    >
-      {children}
-    </ThemeContext.Provider>
+    <div>
+      {translations[locale].replace(/{name}/g, name)}
+      <span role="img" aria-label="hand wave emoji">
+        👋
+      </span>
+    </div>
   );
 };
 
-const Box = () => {
-  const { theme } = useContext(ThemeContext);
+const NestedContainer2 = () => (
+  <div>
+    <GreetingComponent />
+  </div>
+);
 
-  return (
-    <BoxContainer theme={theme}>
-      <p>Box</p>
-    </BoxContainer>
-  );
-};
+const NestedContainer = () => (
+  <div>
+    <NestedContainer2 />
+  </div>
+);
 
 const Container = () => {
-  const { toggleTheme } = useContext(ThemeContext);
+  const { setLocale } = useContext(Context);
 
   return (
-    <React.Fragment>
-      <StyledButton onClick={toggleTheme}>Switch Theme</StyledButton>
-      <StyledContainer>
-        <Box />
-      </StyledContainer>
-    </React.Fragment>
+    <StyledContainer>
+      <StyledSelect onChange={(e: any) => setLocale(e.target.value)}>
+        {availableLocales.map((locale) => (
+          <option key={locale} value={locale}>
+            {locale}
+          </option>
+        ))}
+      </StyledSelect>
+      <NestedContainer />
+    </StyledContainer>
   );
 };
 
 export const ContextHook = () => {
+  const [selectedLocale, setSelectedLocale] = useState("en-US");
+
   return (
-    <ThemeProvider>
+    <Context.Provider
+      value={{
+        name: "Carlos",
+        locale: selectedLocale,
+        setLocale: setSelectedLocale,
+      }}
+    >
       <Container />
-    </ThemeProvider>
+    </Context.Provider>
   );
 };

@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useDebugValue } from "react";
 
 export const useCountRerenders = () => {
   const renders = useRef(0);
+
+  useDebugValue("CountRerenders");
 
   useEffect(() => {
     console.log(renders.current++);
