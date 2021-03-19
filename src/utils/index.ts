@@ -1,3 +1,8 @@
+
+export const getRandomNumber = (num = 100) => {
+  return (Math.random() * num) | 0;
+}
+
 export const emojis = [
   "📙",
   "🆓",

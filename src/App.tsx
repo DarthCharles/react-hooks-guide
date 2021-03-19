@@ -1,9 +1,11 @@
 import React, { useReducer, ReactNode } from "react";
 
 import {
+  CallbackHook,
   StateHook,
   EffectHook,
   ContextHook,
+  MemoHook,
   RefHook,
 } from "./components";
 import { HookName } from "./HookName";
@@ -65,12 +67,12 @@ function reducer(state: AppState, action: AppAction) {
       };
     case ActionTypes.USE_CALLBACK:
       return {
-        currentComponent: null,
+        currentComponent: <CallbackHook />,
         name: action.type,
       };
     case ActionTypes.USE_MEMO:
       return {
-        currentComponent: null,
+        currentComponent: <MemoHook />,
         name: action.type,
       };
     case ActionTypes.USE_IMPERATIVE_HANDLE:
@@ -88,7 +90,7 @@ function reducer(state: AppState, action: AppAction) {
         currentComponent: null,
         name: action.type,
       };
-    case ActionTypes.USE_CUSTOM_HOOK:
+    case ActionTypes.USE_CUSTOM:
       return {
         currentComponent: null,
         name: action.type,
@@ -187,7 +189,7 @@ const App = () => {
       <button
         onClick={() =>
           dispatch({
-            type: ActionTypes.USE_CUSTOM_HOOK,
+            type: ActionTypes.USE_CUSTOM,
           })
         }
       >
