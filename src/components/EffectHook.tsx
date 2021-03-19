@@ -1,44 +1,74 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const DogContainer = styled.div`
+  display: flex;
+`;
+
+const DogPhotoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-top: 60px;
+`;
+
+const StyledNextButton = styled.button`
+  margin-top: 15px;
+`;
+
+const StyledTextArea = styled.textarea`
+  height: 255px;
+  width: 400px;
+`;
+
+const StyledDogPhoto = styled.img`
+  height: 300px;
+  width: 350px;
+`;
 
 export const EffectHook = () => {
-  const [randomDog, setRandomDog] = useState("");
-  const [shouldFetchNew, setshouldFetchNew] = useState(true);
+  const [value, setValue] = useState("");
+  const [dogPhoto, setDogPhoto] = useState("");
+  const [nextPhoto, setNextPhoto] = useState(1);
 
   useEffect(() => {
-    console.log("I render");
+    const fetchDogPhoto = async () => {
+      const response = await fetch(
+        "https://dog.ceo/api/breeds/image/random",
+      );
+      const json = await response.json();
 
-    return () => {
-      console.log("Im gone");
+      setDogPhoto(json.message);
     };
-  });
 
-  useEffect(() => {
-    if (shouldFetchNew) {
-      fetch("https://dog.ceo/api/breeds/image/random")
-        .then((response) => response.json())
-        .then((json) => {
-          setshouldFetchNew(false);
-          setRandomDog(json.message);
-        });
-    }
-  }, [shouldFetchNew]);
-
-  const onClickHandler = () => {
-    setshouldFetchNew(true);
-  };
+    fetchDogPhoto();
+  }, [nextPhoto]);
 
   return (
-    <div>
-      <button onClick={onClickHandler}>
-        Random{" "}
-        <span role="img" aria-label="dog">
-          🐶
-        </span>
-      </button>
-      <br />
-      {randomDog && (
-        <img style={{ width: 300 }} alt="dog" src={randomDog} />
+    <DogContainer>
+      {dogPhoto && (
+        <DogPhotoContainer>
+          <h4>Dog #{nextPhoto}</h4>
+          <StyledDogPhoto alt="dog" src={dogPhoto} />
+        </DogPhotoContainer>
       )}
-    </div>
+      <MessageContainer>
+        <StyledTextArea
+          placeholder="Type something..."
+          value={value}
+          onChange={(e: any) => setValue(e.target.value)}
+        />
+        <StyledNextButton
+          onClick={() => setNextPhoto((prev) => prev + 1)}
+        >
+          Next Dog
+        </StyledNextButton>
+      </MessageContainer>
+    </DogContainer>
   );
 };

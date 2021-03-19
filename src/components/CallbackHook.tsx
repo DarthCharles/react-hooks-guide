@@ -1,79 +1,101 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
-const DogContainer = styled.div`
-  display: flex;
-`;
+import { getRandomNumber, emojis } from "../utils";
+import { useCountRerenders } from "../hooks/useCountRerenders";
 
-const MessageContainer = styled.div`
+const Container = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
-  padding-left: 10px;
 `;
 
-const StyledNextButton = styled.button`
-  margin-top: 15px;
+const ActionsContainer = styled.div`
+  display: flex;
 `;
 
-const StyledTextArea = styled.textarea`
-  height: 255px;
-  width: 400px;
+const EmojiListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-top: 40px;
+  flex-wrap: wrap;
 `;
 
-const StyledDogPhoto = styled.img`
-  height: 300px;
-  width: 350px;
+const StyledEmoji = styled.button`
+  font-size: 44px;
 `;
 
-const DogPhoto = ({
-  fetchDogPhoto,
-}: {
-  fetchDogPhoto: () => Promise<string>;
-}) => {
-  const [dogPhoto, setDogPhoto] = useState("");
+const StyledButton = styled.button`
+  height: 45px;
+  width: 100px;
+`;
 
-  useEffect(() => {
-    const a = async () => {
-      const photo = await fetchDogPhoto();
-      setDogPhoto(photo);
-    };
+const StyledInput = styled.input`
+  height: 40px;
+  width: 100px;
+`;
 
-    a();
-  }, [fetchDogPhoto]);
+const EmojiList = React.memo(
+  ({
+    getEmojis,
+    onEmojiClick,
+  }: {
+    getEmojis: any;
+    onEmojiClick: any;
+  }) => {
+    const [emojis, setEmojis] = useState([]);
+    useCountRerenders();
 
-  return <StyledDogPhoto alt="dog" src={dogPhoto} />;
-};
+    useEffect(() => {
+      setEmojis(getEmojis);
+    }, [getEmojis]);
+
+    return (
+      <EmojiListContainer>
+        {emojis.map((emoji: string, index: number) => (
+          <StyledEmoji onClick={onEmojiClick} key={`e_${index}`}>
+            {emoji}
+          </StyledEmoji>
+        ))}
+      </EmojiListContainer>
+    );
+  },
+);
 
 export const CallbackHook = () => {
-  const [value, setValue] = useState("");
+  const [count, setCount] = useState(0);
+  const [value, setValue] = useState(10);
 
-  // const getRandomDog = async () => {
-  //   const response = await fetch(
-  //     "https://dog.ceo/api/breeds/image/random",
-  //   );
-  //   const json = await response.json();
-  //   return json.message;
-  // };
-
-  const getRandomDog = useCallback(async () => {
-    const response = await fetch(
-      "https://dog.ceo/api/breeds/image/random",
-    );
-    const json = await response.json();
-    return json.message;
+  const onEmojiClick = useCallback((event: any) => {
+    console.log("You clicked ", event.currentTarget);
   }, []);
 
+  const getEmojis = useCallback(() => {
+    let result = [];
+    for (let i = 0; i < value; i++) {
+      result.push(emojis[getRandomNumber(emojis.length)]);
+    }
+
+    return result;
+  }, [value]);
+
   return (
-    <DogContainer>
-      <DogPhoto fetchDogPhoto={getRandomDog} />
-      <MessageContainer>
-        <StyledTextArea
-          placeholder="Type something..."
+    <Container>
+      <ActionsContainer>
+        <StyledInput
+          type="number"
           value={value}
-          onChange={(e: any) => setValue(e.target.value)}
+          onChange={(e: any) =>
+            setValue(parseInt(e.target.value, 10))
+          }
         />
-        <StyledNextButton>Next Dog</StyledNextButton>
-      </MessageContainer>
-    </DogContainer>
+
+        <StyledButton onClick={() => setCount((c) => c + 1)}>
+          Hi
+        </StyledButton>
+      </ActionsContainer>
+      <EmojiList getEmojis={getEmojis} onEmojiClick={onEmojiClick} />
+    </Container>
   );
 };

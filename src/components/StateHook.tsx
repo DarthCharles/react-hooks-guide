@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
-// const expensiveComputation = () => {
-//   console.log("Im expensive and will run once");
-//   return 4;
-// };
+const expensiveComputation = () => {
+  return 4;
+};
 
 export const StateHook = () => {
-  const [count, setCount] = useState(0);
-  // const [count, setCount] = useState(() => expensiveComputation());
+  // const [count, setCount] = useState(0);
+  const [count, setCount] = useState(() => expensiveComputation());
   // const [count, setCount] = useState(expensiveComputation());
 
   const incrementCount = () => {

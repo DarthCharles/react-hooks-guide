@@ -1,7 +1,17 @@
+export const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee",
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222",
+  },
+};
 
 export const getRandomNumber = (num = 100) => {
   return (Math.random() * num) | 0;
-}
+};
 
 export const emojis = [
   "📙",
@@ -49,4 +59,14 @@ export const emojis = [
   "📖",
   "🔖",
   "📳",
+  "🤡",
+  "🔧",
+  "🧹",
+  "🖐🏼",
+  "🚀",
+  "🐶",
+  "👀",
+  "💆🏽‍♂️",
+  "🎣",
+  "🕔",
 ];
