@@ -71,6 +71,7 @@ export const CallbackHook = () => {
     console.log('You clicked ', event.currentTarget);
   }, []);
 
+
   const getEmojis = useCallback(() => {
     let result = [];
     for (let i = 0; i < value; i++) {

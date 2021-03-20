@@ -21,7 +21,7 @@ export const RefHook = () => {
   const [value, setValue] = useState('');
 
   // Example of getting re-render count using state
-  const [count, setCount] = useState(0);
+  const [count] = useState(0);
 
   // useEffect(() => {
   // console.count("Infinite loop");

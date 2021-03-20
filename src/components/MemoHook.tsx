@@ -60,8 +60,6 @@ export const MemoHook = () => {
   const numbers = useMemo(() => getFibonacciNumbers(num), [num]);
   // const numbers = getFibonacciNumbers(num);
 
-  useEffect(() => {}, [count]);
-
   return (
     <Container>
       <MathContainer>

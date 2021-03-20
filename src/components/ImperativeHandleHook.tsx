@@ -1,43 +1,48 @@
 import React, { useEffect, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components';
 
+const StyledInput = styled.input`
+  height: 30px;
+`;
+
 const StyledButton = styled.button`
   height: 36px;
 `;
 
-const NiceButton = React.forwardRef(
-  ({ onClick }: { onClick: () => void }, ref) => {
-    const buttonRef = useRef(null);
+const NiceInput = React.forwardRef((_props, ref) => {
+  const inputRef = useRef(null);
 
-    useEffect(() => {
-      buttonRef.current.secretValue =
-        'This should not be available outside this component';
-    }, []);
+  useEffect(() => {
+    inputRef.current.secretValue =
+      'This should not be available outside this component';
+  }, []);
 
-    useImperativeHandle(ref, () => ({
-      focus: () => {
-        console.log('Enhanced Focus');
-        buttonRef.current.focus();
-      },
-      click: () => {
-        alert('Extending');
-      },
-    }));
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.style.background = 'red';
+      inputRef.current.focus();
+    },
+    customMethod: () => {
+      inputRef.current.value = 'Something nice';
+    },
+  }));
 
-    return (
-      <StyledButton ref={buttonRef} onClick={onClick}>
-        Click me
-      </StyledButton>
-    );
-  },
-);
+  return <StyledInput ref={inputRef} type="text" />;
+});
 
 export const ImperativeHandleHook = () => {
-  const buttonRef = useRef(null);
+  const niceInputRef = useRef(null);
 
   const onClickHandler = () => {
-    console.log(buttonRef.current);
+    niceInputRef.current.focus();
+    niceInputRef.current.customMethod();
+    console.log(niceInputRef.current);
   };
 
-  return <NiceButton onClick={onClickHandler} ref={buttonRef} />;
+  return (
+    <React.Fragment>
+      <NiceInput ref={niceInputRef} />
+      <StyledButton onClick={onClickHandler}>Click Me</StyledButton>
+    </React.Fragment>
+  );
 };
