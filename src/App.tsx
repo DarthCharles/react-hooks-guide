@@ -1,4 +1,4 @@
-import React, { useReducer, ReactNode } from "react";
+import React, { useReducer, ReactNode } from 'react';
 
 import {
   CallbackHook,
@@ -8,22 +8,25 @@ import {
   MemoHook,
   RefHook,
   CustomHook,
-} from "./components";
-import { HookName } from "./HookName";
-import { ThemeProvider } from "./ThemeProvider";
+  ImperativeHandleHook,
+  LayoutEffectHook,
+  DebugValueHook,
+} from './components';
+import { HookName } from './HookName';
+import { ThemeProvider } from './ThemeProvider';
 
 export enum ActionTypes {
-  USE_STATE = "useState",
-  USE_EFFECT = "useEffect",
-  USE_CONTEXT = "useContext",
-  USE_REDUCER = "useReducer",
-  USE_CALLBACK = "useCallback",
-  USE_MEMO = "useMemo",
-  USE_REF = "useRef",
-  USE_IMPERATIVE_HANDLE = "useImperativeHandle",
-  USE_LAYOUT_EFFECT = "useLayoutEffect",
-  USE_DEBUG_VALUE = "useDebugValue",
-  USE_CUSTOM = "useCustom",
+  USE_STATE = 'useState',
+  USE_EFFECT = 'useEffect',
+  USE_CONTEXT = 'useContext',
+  USE_REDUCER = 'useReducer',
+  USE_MEMO = 'useMemo',
+  USE_CALLBACK = 'useCallback',
+  USE_REF = 'useRef',
+  USE_IMPERATIVE_HANDLE = 'useImperativeHandle',
+  USE_LAYOUT_EFFECT = 'useLayoutEffect',
+  USE_DEBUG_VALUE = 'useDebugValue',
+  USE_CUSTOM = 'useCustom',
 }
 
 export type AppState = {
@@ -37,7 +40,7 @@ export type AppAction = {
 
 const initialState: AppState = {
   currentComponent: null,
-  name: "",
+  name: '',
 };
 
 function reducer(state: AppState, action: AppAction) {
@@ -79,17 +82,17 @@ function reducer(state: AppState, action: AppAction) {
       };
     case ActionTypes.USE_IMPERATIVE_HANDLE:
       return {
-        currentComponent: null,
+        currentComponent: <ImperativeHandleHook />,
         name: action.type,
       };
     case ActionTypes.USE_LAYOUT_EFFECT:
       return {
-        currentComponent: null,
+        currentComponent: <LayoutEffectHook />,
         name: action.type,
       };
     case ActionTypes.USE_DEBUG_VALUE:
       return {
-        currentComponent: null,
+        currentComponent: <DebugValueHook />,
         name: action.type,
       };
     case ActionTypes.USE_CUSTOM:
@@ -109,97 +112,18 @@ const App = () => {
   return (
     <ThemeProvider>
       <div className="App">
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_STATE,
-            })
-          }
-        >
-          useState
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_EFFECT,
-            })
-          }
-        >
-          useEffect
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_CONTEXT,
-            })
-          }
-        >
-          useContext
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_REDUCER,
-            })
-          }
-        >
-          useReducer
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_CALLBACK,
-            })
-          }
-        >
-          useCallback
-        </button>
-        <button
-          onClick={() => dispatch({ type: ActionTypes.USE_MEMO })}
-        >
-          useMemo
-        </button>
-        <button
-          onClick={() => dispatch({ type: ActionTypes.USE_REF })}
-        >
-          useRef
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_IMPERATIVE_HANDLE,
-            })
-          }
-        >
-          useImperativeHandle
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_LAYOUT_EFFECT,
-            })
-          }
-        >
-          useLayoutEffect
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_DEBUG_VALUE,
-            })
-          }
-        >
-          useDebugValue
-        </button>
-        <button
-          onClick={() =>
-            dispatch({
-              type: ActionTypes.USE_CUSTOM,
-            })
-          }
-        >
-          useCustom
-        </button>
+        {Object.keys(ActionTypes).map((key, index) => (
+          <button
+            key={`b_${index}`}
+            onClick={() =>
+              dispatch({
+                type: ActionTypes[key],
+              })
+            }
+          >
+            {ActionTypes[key]}
+          </button>
+        ))}
         {name && <HookName name={name} />}
         {currentComponent ? currentComponent : <p> Pick a hook! </p>}
       </div>

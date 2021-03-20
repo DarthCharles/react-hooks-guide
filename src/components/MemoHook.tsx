@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useMemo, useState } from 'react';
+import styled from 'styled-components';
 
-import { getRandomNumber } from "../utils";
-import { useCountRerenders } from "../hooks/useCountRerenders";
+import { getRandomNumber } from '../utils';
+import { useCountRerenders } from '../hooks';
 
 const Container = styled.div``;
 
@@ -25,6 +25,7 @@ const FibonacciListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding-left: 25px;
+  margin-right: 30px;
 `;
 
 const StyledInput = styled.input`
@@ -66,7 +67,7 @@ export const MemoHook = () => {
       <MathContainer>
         <RandomContainer>
           <h4>Random Number</h4>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: 'flex' }}>
             <StyledInput type="text" value={count} readOnly={true} />
             <button onClick={() => setCount(getRandomNumber())}>
               Get Random!
@@ -75,7 +76,7 @@ export const MemoHook = () => {
         </RandomContainer>
         <FibonacciContainer>
           <h4>Fibonacci Series</h4>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: 'flex' }}>
             <StyledInput
               type="number"
               value={num}

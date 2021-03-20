@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+  color: white;
+  font-size: 28px;
+  padding: 40px;
+`;
+
+const StyledSpan = styled.span`
+  padding: 0px 10px;
+`;
 
 const expensiveComputation = () => {
   return 4;
 };
 
-export const StateHook = () => {
-  // const [count, setCount] = useState(0);
-  const [count, setCount] = useState(() => expensiveComputation());
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(() => expensiveComputation());
   // const [count, setCount] = useState(expensiveComputation());
 
   const incrementCount = () => {
@@ -14,21 +25,48 @@ export const StateHook = () => {
   };
 
   const decrementCount = () => {
-    setCount((prevCount) => prevCount - 1);
+    setCount(count - 1);
   };
 
   return (
     <div>
       <button onClick={incrementCount}>+</button>
-      <span
-        style={{
-          paddingLeft: 10,
-          paddingRight: 10,
-        }}
-      >
-        {count}
-      </span>
+      <StyledSpan>{count}</StyledSpan>
       <button onClick={decrementCount}>-</button>
+    </div>
+  );
+};
+
+const ColoredButtons = () => {
+  const [colors, buttonColors] = useState<any>({
+    button1: 'red',
+    button2: 'blue',
+    button3: 'green',
+  });
+
+  return (
+    <div>
+      <StyledButton
+        onClick={() => buttonColors({ button1: 'purple' })}
+        style={{ background: colors.button1 }}
+      >
+        Button 1
+      </StyledButton>
+      <StyledButton style={{ background: colors.button2 }}>
+        Button 2
+      </StyledButton>
+      <StyledButton style={{ background: colors.button3 }}>
+        Button 3
+      </StyledButton>
+    </div>
+  );
+};
+
+export const StateHook = () => {
+  return (
+    <div>
+      {/* <Counter /> */}
+      <ColoredButtons />
     </div>
   );
 };
