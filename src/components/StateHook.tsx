@@ -63,6 +63,7 @@ export const StateHook = () => {
   return (
     <div>
       <Counter />
+      <br />
       <ColoredButtons />
     </div>
   );
