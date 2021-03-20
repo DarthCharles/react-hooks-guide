@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const DogContainer = styled.div`
   display: flex;
@@ -32,14 +32,14 @@ const StyledDogPhoto = styled.img`
 `;
 
 export const EffectHook = () => {
-  const [value, setValue] = useState("");
-  const [dogPhoto, setDogPhoto] = useState("");
+  const [value, setValue] = useState('');
+  const [dogPhoto, setDogPhoto] = useState('');
   const [nextPhoto, setNextPhoto] = useState(1);
 
   useEffect(() => {
     const fetchDogPhoto = async () => {
       const response = await fetch(
-        "https://dog.ceo/api/breeds/image/random",
+        'https://dog.ceo/api/breeds/image/random',
       );
       const json = await response.json();
 

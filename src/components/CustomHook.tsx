@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { useCountRerenders, useDogFetcher, useTheme } from "../hooks";
+import { useCountRerenders, useDogFetcher, useTheme } from '../hooks';
 
 const BoxContainer = styled.div`
   display: flex;

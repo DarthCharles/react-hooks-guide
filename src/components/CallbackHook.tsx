@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-import { getRandomNumber, emojis } from "../utils";
-import { useCountRerenders } from "../hooks/useCountRerenders";
+import { getRandomNumber, emojis } from '../utils';
+import { useCountRerenders } from '../hooks';
 
 const Container = styled.div`
   display: flex;
@@ -68,7 +68,7 @@ export const CallbackHook = () => {
   const [value, setValue] = useState(10);
 
   const onEmojiClick = useCallback((event: any) => {
-    console.log("You clicked ", event.currentTarget);
+    console.log('You clicked ', event.currentTarget);
   }, []);
 
   const getEmojis = useCallback(() => {

@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useState } from 'react';
+import styled from 'styled-components';
 
-import { translations, availableLocales } from "../utils";
+import { translations, availableLocales } from '../utils';
 
 const StyledContainer = styled.div`
   font-size: 36px;
@@ -18,8 +18,8 @@ export const Context = React.createContext<{
   locale: string;
   setLocale: (locale: string) => void;
 }>({
-  name: "",
-  locale: "en-US",
+  name: '',
+  locale: 'en-US',
   setLocale: () => null,
 });
 
@@ -65,12 +65,12 @@ const Container = () => {
 };
 
 export const ContextHook = () => {
-  const [selectedLocale, setSelectedLocale] = useState("en-US");
+  const [selectedLocale, setSelectedLocale] = useState('en-US');
 
   return (
     <Context.Provider
       value={{
-        name: "Carlos",
+        name: 'Carlos',
         locale: selectedLocale,
         setLocale: setSelectedLocale,
       }}

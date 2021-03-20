@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { themes } from "./utils";
+import { themes } from './utils';
 
 export type Theme = {
   foreground: string;
@@ -20,10 +20,10 @@ export const ThemeProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [currentTheme, setTheme] = useState("light");
+  const [currentTheme, setTheme] = useState('light');
 
   const toggleTheme = () => {
-    setTheme(currentTheme === "light" ? "dark" : "light");
+    setTheme(currentTheme === 'light' ? 'dark' : 'light');
   };
 
   return (
