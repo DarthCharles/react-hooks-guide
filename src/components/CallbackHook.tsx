@@ -64,7 +64,7 @@ const EmojiList = React.memo(
 );
 
 export const CallbackHook = () => {
-  const [count, setCount] = useState(0);
+  const [, setCount] = useState(0);
   const [value, setValue] = useState(10);
 
   const onEmojiClick = useCallback((event: any) => {
@@ -93,7 +93,7 @@ export const CallbackHook = () => {
         />
 
         <StyledButton onClick={() => setCount((c) => c + 1)}>
-          Hi
+          Change State
         </StyledButton>
       </ActionsContainer>
       <EmojiList getEmojis={getEmojis} onEmojiClick={onEmojiClick} />

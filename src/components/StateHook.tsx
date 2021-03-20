@@ -11,14 +11,11 @@ const StyledSpan = styled.span`
   padding: 0px 10px;
 `;
 
-const expensiveComputation = () => {
-  return 4;
-};
-
-const Counter = () => {
+export const Counter = () => {
   const [count, setCount] = useState(0);
-  // const [count, setCount] = useState(() => expensiveComputation());
-  // const [count, setCount] = useState(expensiveComputation());
+  // const [count, setCount] = useState(() => {
+  //   return 4;
+  // });
 
   const incrementCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -65,7 +62,7 @@ const ColoredButtons = () => {
 export const StateHook = () => {
   return (
     <div>
-      {/* <Counter /> */}
+      <Counter />
       <ColoredButtons />
     </div>
   );
