@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { getRandomNumber } from '../utils';
@@ -24,17 +24,17 @@ const StyledButton = styled.div`
 export const LayoutEffectHook = () => {
   const [value, setValue] = useState(0);
 
-  // useLayoutEffect(() => {
-  //   if (value < 0) {
-  //     setValue(getRandomNumber());
-  //   }
-  // }, [value]);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (value < 0) {
       setValue(getRandomNumber());
     }
   }, [value]);
+
+  // useEffect(() => {
+  //   if (value < 0) {
+  //     setValue(getRandomNumber());
+  //   }
+  // }, [value]);
 
   return (
     <StyledContainer onClick={() => setValue(-1)}>

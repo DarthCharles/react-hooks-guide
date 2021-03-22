@@ -19,7 +19,7 @@ export const Context = React.createContext<{
   setLocale: (locale: string) => void;
 }>({
   name: '',
-  locale: 'en-US',
+  locale: '',
   setLocale: () => null,
 });
 

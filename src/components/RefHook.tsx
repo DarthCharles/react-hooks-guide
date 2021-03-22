@@ -20,14 +20,6 @@ export const RefHook = () => {
 
   const [value, setValue] = useState('');
 
-  // // Example of getting re-render count using state
-  // const [count, setCount] = useState(0);
-
-  // useEffect(() => {
-  // console.count("Infinite loop");
-  // setCount((prevCount) => prevCount + 1);
-  // });
-
   // Example of getting re-render count using ref
   useEffect(() => {
     renderCountRef.current = renderCountRef.current + 1;
@@ -37,6 +29,8 @@ export const RefHook = () => {
     if (inputRef.current) {
       inputRef.current.focus();
       inputRef.current.value = 'Some nice value';
+      inputRef.current.style.color = 'white';
+      inputRef.current.style.background = 'blue';
     }
   };
 

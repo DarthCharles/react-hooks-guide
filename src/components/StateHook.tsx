@@ -12,11 +12,12 @@ const StyledSpan = styled.span`
 `;
 
 export const Counter = () => {
-  const [count, setCount] = useState(34);
+  // const [count, setCount] = useState(10);
 
-  // const [count, setCount] = useState(() => {
-  //   return 4;
-  // });
+  const [count, setCount] = useState(() => {
+    // expensiveCall();
+    return 4;
+  });
 
   const incrementCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -45,7 +46,7 @@ const ColoredButtons = () => {
   return (
     <div>
       <StyledButton
-        onClick={() => buttonColors({ ...colors, button1: 'purple' })}
+        onClick={() => buttonColors({ button1: 'purple' })}
         style={{ background: colors.button1 }}
       >
         Button 1
@@ -63,7 +64,7 @@ const ColoredButtons = () => {
 export const StateHook = () => {
   return (
     <div>
-      {/* <Counter /> */}
+      <Counter />
       <ColoredButtons />
     </div>
   );

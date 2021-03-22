@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { getRandomNumber, emojis } from '../utils';
+import { getRandomNumber, emojis as emojiList } from '../utils';
 import { useCountRerenders } from '../hooks';
 
 const Container = styled.div`
@@ -31,25 +31,23 @@ const StyledButton = styled.button`
   width: 100px;
 `;
 
-const StyledInput = styled.input`
-  height: 40px;
-  width: 100px;
-`;
-
 const EmojiList = React.memo(
-  ({
-    getEmojis,
-    onEmojiClick,
-  }: {
-    getEmojis: any;
-    onEmojiClick: any;
-  }) => {
+  ({ onEmojiClick }: { onEmojiClick: (e: any) => void }) => {
     const [emojis, setEmojis] = useState([]);
     useCountRerenders();
 
     useEffect(() => {
-      setEmojis(getEmojis);
-    }, [getEmojis]);
+      const getEmojis = () => {
+        let result = [];
+        for (let i = 0; i < 1000; i++) {
+          result.push(emojiList[getRandomNumber(emojiList.length)]);
+        }
+
+        return result;
+      };
+
+      setEmojis(getEmojis());
+    }, []);
 
     return (
       <EmojiListContainer>
@@ -65,38 +63,23 @@ const EmojiList = React.memo(
 
 export const CallbackHook = () => {
   const [, setCount] = useState(0);
-  const [value, setValue] = useState(10);
+
+  // const onEmojiClick = (event: any) => {
+  //   console.log('You clicked ', event.currentTarget);
+  // };
 
   const onEmojiClick = useCallback((event: any) => {
     console.log('You clicked ', event.currentTarget);
   }, []);
 
-
-  const getEmojis = useCallback(() => {
-    let result = [];
-    for (let i = 0; i < value; i++) {
-      result.push(emojis[getRandomNumber(emojis.length)]);
-    }
-
-    return result;
-  }, [value]);
-
   return (
     <Container>
       <ActionsContainer>
-        <StyledInput
-          type="number"
-          value={value}
-          onChange={(e: any) =>
-            setValue(parseInt(e.target.value, 10))
-          }
-        />
-
         <StyledButton onClick={() => setCount((c) => c + 1)}>
           Change State
         </StyledButton>
       </ActionsContainer>
-      <EmojiList getEmojis={getEmojis} onEmojiClick={onEmojiClick} />
+      <EmojiList onEmojiClick={onEmojiClick} />
     </Container>
   );
 };

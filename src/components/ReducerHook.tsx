@@ -32,7 +32,7 @@ function reducer(state = initialState, action: CounterAction) {
     case CounterActionTypes.ADD:
       return { count: state.count + 1 };
     case CounterActionTypes.SUBSTRACT:
-      return { count: state.count + 1 };
+      return { count: state.count - 1 };
     case CounterActionTypes.MULTIPLY:
       return { count: state.count * 2 };
     default:

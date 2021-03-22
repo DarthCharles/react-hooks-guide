@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { getRandomNumber } from '../utils';
-import { useCountRerenders } from '../hooks';
 
 const Container = styled.div``;
 
@@ -53,9 +52,7 @@ const getFibonacciNumbers = (number: number) => {
 
 export const MemoHook = () => {
   const [count, setCount] = useState(0);
-  const [num, setNum] = useState(30);
-
-  useCountRerenders();
+  const [num, setNum] = useState(35);
 
   const numbers = useMemo(() => getFibonacciNumbers(num), [num]);
   // const numbers = getFibonacciNumbers(num);

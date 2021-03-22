@@ -6,6 +6,6 @@ export const useCountRerenders = () => {
   useDebugValue(`CountRerenders: ${renders.current}`);
 
   useEffect(() => {
-    console.log(renders.current++);
+    console.log(`Rerender: ${renders.current++}`);
   });
 };

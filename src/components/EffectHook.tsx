@@ -37,6 +37,21 @@ export const EffectHook = () => {
   const [nextPhoto, setNextPhoto] = useState(1);
 
   useEffect(() => {
+    console.log('Render');
+  });
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => console.log('Side Effect!'),
+      3000,
+    );
+
+    return () => {
+      clearTimeout(interval);
+    };
+  });
+
+  useEffect(() => {
     const fetchDogPhoto = async () => {
       const response = await fetch(
         'https://dog.ceo/api/breeds/image/random',
