@@ -11,6 +11,7 @@ import {
   ImperativeHandleHook,
   LayoutEffectHook,
   DebugValueHook,
+  ReducerHook,
 } from './components';
 import { HookName } from './HookName';
 import { ThemeProvider } from './ThemeProvider';
@@ -67,7 +68,7 @@ function reducer(state: AppState, action: AppAction) {
       };
     case ActionTypes.USE_REDUCER:
       return {
-        currentComponent: null,
+        currentComponent: <ReducerHook />,
         name: action.type,
       };
     case ActionTypes.USE_CALLBACK:
@@ -101,7 +102,7 @@ function reducer(state: AppState, action: AppAction) {
         name: action.type,
       };
     default:
-      return initialState;
+      return state;
   }
 }
 

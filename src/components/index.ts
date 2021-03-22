@@ -8,6 +8,7 @@ import { CustomHook } from './CustomHook';
 import { ImperativeHandleHook } from './ImperativeHandleHook';
 import { LayoutEffectHook } from './LayoutEffectHook';
 import { DebugValueHook } from './DebugValueHook';
+import { ReducerHook } from './ReducerHook';
 
 export {
   CustomHook,
@@ -20,4 +21,5 @@ export {
   ImperativeHandleHook,
   LayoutEffectHook,
   DebugValueHook,
+  ReducerHook,
 };

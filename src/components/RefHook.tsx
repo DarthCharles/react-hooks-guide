@@ -15,13 +15,13 @@ const StyledText = styled.div`
 `;
 
 export const RefHook = () => {
-  const renderCountRef = useRef(0);
   const inputRef = useRef(null);
+  const renderCountRef = useRef(0);
 
   const [value, setValue] = useState('');
 
-  // Example of getting re-render count using state
-  const [count] = useState(0);
+  // // Example of getting re-render count using state
+  // const [count, setCount] = useState(0);
 
   // useEffect(() => {
   // console.count("Infinite loop");
@@ -45,7 +45,6 @@ export const RefHook = () => {
       <StyledText>
         I've rendered {renderCountRef.current} times using ref.
       </StyledText>
-      <StyledText>I've rendered {count} times</StyledText>
       <br />
       <StyledInput
         ref={inputRef}
